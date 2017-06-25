@@ -39,7 +39,7 @@
 提示：记得pip安装pandas、openpyxl 、bs4。
 
 （对于普通吃瓜群众）
-(下载)['https://github.com/Foldblade/GSTT/releases/download/1.0/GSTT.zip'] ，参照之前的配置修改`setting.json`（记得保存）  
+[下载]('https://github.com/Foldblade/GSTT/releases/download/1.0/GSTT.zip') ，参照之前的配置修改`setting.json`（记得保存）  
 双击`GSTT.exe`运行。  
 喝茶。看到卡住了敲下回车。  
 继续喝茶。  
