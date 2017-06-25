@@ -34,13 +34,17 @@
 作为Linux用户你们一定明白我写了什么。提示一下输出有中文，所以系统语言要支持中文才是。
 
 ### Windows
-（对于懂Python的用户）
-想必你们已经安装了Python。在下使用Python 3.5.3。理论上兼容Python 3.X。
-提示：记得pip安装pandas、openpyxl 、bs4。
+（对于懂Python的用户）  
+想必你们已经安装了Python。在下使用Python 3.5.3。理论上兼容Python 3.X。  
+提示：记得pip安装pandas、openpyxl 、bs4。  
 
 （对于普通吃瓜群众）
 [下载](https://github.com/Foldblade/GSTT/releases/download/1.0/GSTT.zip) ，参照之前的配置修改`setting.json`（记得保存）  
-双击`GSTT.exe`运行。  
+双击`GSTT.exe`运行。  
 喝茶。看到卡住了敲下回车。  
 继续喝茶。  
-黑框框消失了、运行目录出现`output.xlsx`即已经成功。
+黑框框消失了、运行目录出现`output.xlsx`即已经成功。  
+
+## 请我喝ViTA柠檬茶
+我的比特币钱包：1N8DmYvuxq4YhcQ5MfJ856b6sGNGp7pL5p
+ViTA入我心，胜过海洛因！！！
