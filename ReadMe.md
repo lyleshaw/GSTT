@@ -39,4 +39,8 @@
 提示：记得pip安装pandas、openpyxl 、bs4。
 
 （对于普通吃瓜群众）
-下载，参照之前的配置修改`setting.json`（记得保存）
+下载，参照之前的配置修改`setting.json`（记得保存）  
+双击`GSTT.exe`运行。  
+喝茶。看到卡住了敲下回车。  
+继续喝茶。  
+黑框框消失了、运行目录出现`output.xlsx`即已经成功。
