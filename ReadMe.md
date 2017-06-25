@@ -36,7 +36,7 @@
 ### Windows
 （对于懂Python的用户）
 想必你们已经安装了Python。在下使用Python 3.5.3。理论上兼容Python 3.X。
-提示：记得pip安装pandas、openpyxl 。
+提示：记得pip安装pandas、openpyxl 、bs4。
 
 （对于普通吃瓜群众）
 下载，参照之前的配置修改`setting.json`（记得保存）
