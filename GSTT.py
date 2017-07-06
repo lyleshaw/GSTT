@@ -1,10 +1,12 @@
-# encoding:utf-8
+﻿# encoding:utf-8
 import requests
 from bs4 import BeautifulSoup
 import pandas
 import json
 from os import remove
 import codecs
+import time
+import random
 
 print('''
 ***************** GSTT *****************
@@ -14,9 +16,26 @@ print('''
 ****************************************
 ''')
 
-f = open('setting.json', 'r')
-setting = json.load(f)
-f.close()
+start_time = time.clock()
+user_agaents = ['Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36',
+                'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.04',
+                'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27',
+                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10; rv:33.0) Gecko/20100101 Firefox/33.0',
+                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36',
+                'Mozilla/5.0 (X11; CrOS i686 3912.101.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36',
+                'Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/31.0',
+                'Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16',
+                'Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14']
+
+try :
+    f = open('setting.json', 'r')
+    setting = json.load(f)
+    f.close()
+except :
+    print('Bad json.\nDid you read \'ReadMe.md\' carefully ???\n你们这样是不行的啊\nI\'m angry !')
+    time.sleep(30)
+
 # 读取设置
 wen_ke = setting['wen_ke']
 # print(wen_ke)
@@ -40,10 +59,19 @@ def get_total(xm_name,kaohao):
     url = 'http://tya.lhsvr.cn/index.php'
     postdata = {
     'xm_name' : str(xm_name),
-    'kaohao' : str(kaohao)}
+    'kaohao' : str(kaohao),
+    "headers": {
+            "User-Agent": random.choice(user_agaents)}
+    } # 好玩起见加了一段对user_anaent的切换
     s = requests.session()
-    response = s.post(url, data = postdata)
-    response.encoding = 'utf-8'  # 修改编码为utf-8
+    try :
+        response = s.post(url, data=postdata, timeout=10)
+        response.encoding = 'utf-8'  # 修改编码为utf-8
+    except :
+        print('Time out.Please check your connection to the Internet.')
+        print('Exit in 10s.')
+        time.sleep(10) # 网络中断，10s后自动退出
+        exit(1)
     r = response.text
     webdata = BeautifulSoup(r, 'html.parser')
     #print('Data get.Analyzing...')
@@ -76,11 +104,16 @@ def get_total(xm_name,kaohao):
 
 
 all = range(setting["kaohao"][0],setting["kaohao"][1])
+all_num = float(setting["kaohao"][1] - setting["kaohao"][0])
+count = 0
 for kaohao in all:
     try :
         get_total(setting["xm_name"],kaohao)
     except:
-        pass
+        print('Blank or Bad data. Jump.')
+    count = count + 1
+    percentage = count / all_num
+    print('[' + '=' * int(percentage * 30) + '>' + '-' * int(30 - int(percentage * 30)) + ']' + str(int(percentage * 100)) + '%')
 
 
 if setting["division"] == 1:
@@ -100,13 +133,16 @@ if setting["division"] == 1:
 else :
     data = pandas.read_csv('result.csv')
     if setting["rank"] == 1:
-        data.sort(["总分"], ascending=False)
+        data = data.sort_values("总分", ascending=False)
         data['排名'] = '=RANK(D:D,D:D)'
     writer = pandas.ExcelWriter('output.xlsx')
-    data.to_excel(writer, 'Sheet1')
+    data.to_excel(writer, 'Sheet1', index=False)
     writer.save()
-    remove(result.csv)
+    remove('result.csv')
 
 
-print('Done!')
-
+print('Done!'+ time.ctime())
+end_time = time.clock()
+print('Running time :' + str(int(end_time - start_time)) + 's .')
+print('Exit in 30 s.')
+time.sleep(30)
