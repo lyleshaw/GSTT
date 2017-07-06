@@ -62,7 +62,7 @@ def get_total(xm_name,kaohao):
     'kaohao' : str(kaohao),
     "headers": {
             "User-Agent": random.choice(user_agaents)}
-    } # 好玩起见加了一段对user_anaent的切换
+    } # 好玩起见加了一段对user_agaent的切换
     s = requests.session()
     try :
         response = s.post(url, data=postdata, timeout=10)
