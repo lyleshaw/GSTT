@@ -1,3 +1,13 @@
+本程序主体工作（包括使用pandas完成数据清洗与导入，代理访问#然而根本就不用代理啊摔#部分）由FoldBlande完成，爬虫部分由LyleShaw完成。
+
+今日突然想起来随手Fork了一份。
+
+以下是FoldBlade的使用说明
+
+
+···················································
+
+
 # GSTT - Grades System Of TIANYI Test - [天一](http://tya.lhsvr.cn/index.php)成绩批量查询
 
 ## 缘起
